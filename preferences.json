@@ -1,0 +1,8 @@
+[
+  {
+    "type": "checkbox",
+    "label": "Use Zen's accent color for the loading glow (default: Zia blue)",
+    "property": "zia.urlbar.loading-bar.accent-color",
+    "defaultValue": false
+  }
+]

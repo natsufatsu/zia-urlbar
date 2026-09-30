@@ -1,0 +1,520 @@
+:root {
+  --zia-fallback-bg: #121212;
+  --zia-page-loading-bg: #000;
+  --zia-separator: rgba(255, 255, 255, 0.1);
+  --zia-urlbar-hover-bg: rgba(0, 0, 0, 0.2);
+  --zia-urlbar-open-bg: #2c2c2c;
+  --zia-pop-row-height: 36px;
+  --zia-pop-row-gap: 4px;
+  --zia-pop-row-inset: 8px;
+  --zia-pop-row-radius: 8px;
+  --zia-pop-list-pad: 6px;
+  --zia-pop-bottom-trim: 10px;
+  --zia-loading-color: rgb(90, 185, 245);
+  --zia-urlbar-radius: 6px;
+  --zia-urlbar-open-offset: 0px;
+  --zia-card-radius: 10.5px;
+  --zia-toolbar-end-gap: 5px;
+  --zia-text-size: calc(1.22rem - 0.3px);
+  --zia-card-gap: 6px;
+  --zia-card-top-gap: 6px;
+  --zia-toolbar-height: 39px;
+  --zia-urlbar-height: 31px;
+  --zia-card-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.35), 0 1px 4px rgba(0, 0, 0, 0.3);
+  --zia-color-fade: 0.15s;
+  --zia-urlbar-text-weight: 400;
+}
+
+@media -moz-pref("zia.urlbar.loading-bar.accent-color") {
+  :root {
+    --zia-loading-color: var(--zen-primary-color);
+  }
+}
+
+:root[zia-site-dark="true"] {
+  --zia-urlbar-hover-bg: rgba(255, 255, 255, 0.09);
+}
+
+:root[zia-site-light="true"] {
+  --zia-separator: rgba(0, 0, 0, 0.12);
+  --zia-urlbar-hover-bg: rgba(0, 0, 0, 0.06);
+}
+
+:root:not([inDOMFullscreen="true"]):not([popup-window]) {
+  & #zen-appcontent-wrapper {
+    margin: var(--zia-card-top-gap) var(--zia-card-gap) var(--zia-card-gap) 0 !important;
+    border-radius: var(--zia-card-radius) !important;
+    background: transparent !important;
+    box-shadow: var(--zia-card-shadow) !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  &[zen-compact-mode="true"] #zen-appcontent-wrapper {
+    margin-left: var(--zia-card-gap) !important;
+  }
+
+  & :is(#zen-appcontent-wrapper, #zen-appcontent-navbar-wrapper, #tabbrowser-tabpanels .browserSidebarContainer, #tabbrowser-tabpanels .browserStack, #tabbrowser-tabpanels browser) {
+    corner-shape: round !important;
+  }
+
+  & #zen-tabbox-wrapper {
+    margin: 0 !important;
+  }
+
+  & #tabbrowser-tabbox #tabbrowser-tabpanels .browserSidebarContainer {
+    border-radius: 0 0 var(--zia-card-radius) var(--zia-card-radius) !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  & #tabbrowser-tabpanels :is(.browserSidebarContainer, .browserStack, browser) {
+    clip-path: inset(0 round 0 0 var(--zia-card-radius) var(--zia-card-radius));
+  }
+
+  & #tabbrowser-tabpanels browser[type="content"]:not([transparent="true"]) {
+    background: var(--zia-page-loading-bg) !important;
+  }
+
+  & #zen-appcontent-navbar-wrapper {
+    background-color: var(--zia-site-bg, var(--zia-fallback-bg)) !important;
+    border-radius: var(--zia-card-radius) var(--zia-card-radius) 0 0 !important;
+    border-bottom: 1px solid var(--zia-separator) !important;
+    transition: background-color var(--zia-color-fade) ease, border-color var(--zia-color-fade) ease !important;
+  }
+
+  &[zia-color-snap="true"] #zen-appcontent-navbar-wrapper {
+    transition: none !important;
+  }
+
+  & #nav-bar {
+    padding-inline: var(--zia-toolbar-end-gap) !important;
+    --zen-toolbar-height: var(--zia-toolbar-height) !important;
+    --urlbar-height: var(--zia-urlbar-height) !important;
+  }
+
+  & #urlbar-container {
+    margin-inline-start: 8px !important;
+  }
+}
+
+#urlbar:not(:hover):not([focused]):not([breakout-extend]) > .urlbar-background {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+#urlbar:not([breakout-extend]) > .urlbar-background {
+  border-radius: var(--zia-urlbar-radius) !important;
+  transition: background-color 0.06s linear !important;
+}
+
+#urlbar:not([breakout-extend]) {
+  height: var(--zia-urlbar-height) !important;
+  min-height: var(--zia-urlbar-height) !important;
+  max-height: var(--zia-urlbar-height) !important;
+
+  --urlbar-height: var(--zia-urlbar-height) !important;
+
+  & :is(.urlbar-input, #zia-url-title, #zia-url-plain) {
+    translate: 0 0;
+  }
+}
+
+#urlbar:is(:hover, [focused]):not([breakout-extend]) > .urlbar-background {
+  background: var(--zia-urlbar-hover-bg) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+#urlbar[breakout-extend] {
+  border-radius: 16.5px !important;
+  translate: var(--zia-urlbar-open-offset-x, 0px) var(--zia-urlbar-open-offset) !important;
+  --urlbarview-separator-color: transparent !important;
+  --urlbarView-separator-color: transparent !important;
+
+  & > .urlbar-background {
+    background: var(--zia-urlbar-open-bg) !important;
+    border-radius: 16.5px !important;
+    outline: 1px solid rgba(255, 255, 255, 0.08) !important;
+    outline-offset: -1px !important;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: none !important;
+
+    transform-origin: 50% 0 !important;
+    animation: zia-urlbar-open 0.18s cubic-bezier(0.2, 0.9, 0.3, 1) !important;
+  }
+
+  & .urlbarView-body-inner {
+    border-top: none !important;
+  }
+}
+
+@keyframes zia-urlbar-open {
+  from { scale: 0.8; opacity: 0.4; }
+  to { scale: 1; opacity: 1; }
+}
+
+#urlbar[breakout-extend] {
+  & .urlbarView-row {
+    margin-inline: var(--zia-pop-row-inset) !important;
+    margin-block: calc(var(--zia-pop-row-gap) / 2) !important;
+    padding-block: 0 !important;
+    border-radius: var(--zia-pop-row-radius) !important;
+
+    & > .urlbarView-row-inner {
+      padding-block: 0 !important;
+      min-height: var(--zia-pop-row-height) !important;
+      align-items: center !important;
+    }
+  }
+
+  & .urlbarView-row:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+  }
+
+  & .urlbarView-row[selected] {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+
+    & .urlbarView-shortcutContent {
+      background-color: transparent !important;
+      fill: rgba(255, 255, 255, 0.9) !important;
+    }
+  }
+
+  & .urlbarView-favicon {
+    background-color: transparent !important;
+    border-radius: 0 !important;
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    padding: 0 !important;
+  }
+
+  & .urlbarView-row :is(.urlbarView-title,
+    .urlbarView-url,
+    .urlbarView-action,
+    .urlbarView-title-separator,
+    .urlbarView-tags,
+    .urlbarView-title strong) {
+    font-size: var(--zia-text-size) !important;
+  }
+
+  & .urlbarView-row :is(.urlbarView-title,
+    .urlbarView-url,
+    .urlbarView-action,
+    .urlbarView-title-separator,
+    .urlbarView-tags) {
+    font-weight: var(--zia-urlbar-text-weight) !important;
+  }
+
+  & .urlbarView-row :is(.urlbarView-title, .urlbarView-url, .urlbarView-action) strong {
+    font-weight: var(--zia-urlbar-text-weight) !important;
+  }
+
+  & .urlbarView-row :is(.urlbarView-title, .urlbarView-title strong) {
+    color: rgb(255, 255, 255) !important;
+  }
+
+  & .urlbarView-row :is(.urlbarView-url, .urlbarView-action, .urlbarView-title-separator) {
+    color: rgba(255, 255, 255, 0.55) !important;
+  }
+
+  & :is(.urlbarView-button-result-menu, .urlbarView-result-menu-button, .urlbarView-button-menu) {
+    display: none !important;
+  }
+
+  & :is(.urlbarView-action.urlbarView-switchToTab, .urlbarView-row[type="switchtab"] .urlbarView-action) {
+    display: none !important;
+  }
+
+  & :is(.urlbarView, .urlbarView-body-outer, .urlbarView-results, #urlbar-results) {
+    padding-inline: 0 !important;
+    padding-block: 0 !important;
+    margin-inline: 0 !important;
+  }
+
+  & .urlbarView-body-inner {
+    padding-inline: 0 !important;
+    margin-inline: 0 !important;
+  }
+
+  & .urlbarView-body-inner {
+    padding-block: var(--zia-pop-list-pad) !important;
+  }
+
+  & .urlbarView {
+    margin-block-end: calc(-1 * var(--zia-pop-bottom-trim)) !important;
+  }
+
+  :root[zia-pop-scrolls="true"] & .urlbarView {
+    clip-path: inset(0 0 var(--zia-pop-row-inset) 0);
+  }
+
+  --urlbarView-item-inline-padding: 8px !important;
+
+  & :is(.urlbarView, .urlbarView-body-outer, .urlbarView-body-inner, .urlbarView-results, #urlbar-results) {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+  }
+
+  & :is(.urlbarView-body-inner, .urlbarView-body-outer, .urlbarView-results, #urlbar-results) {
+    margin-block: 0 !important;
+    border-block: 0 !important;
+  }
+
+  & .urlbarView-row-buttons {
+    display: none !important;
+  }
+
+  & :is(.search-one-offs, #urlbar-one-offs, .search-panel-one-offs-container) {
+    display: none !important;
+  }
+}
+
+#urlbar:not([breakout-extend])::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--zia-urlbar-radius);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  --zia-load-width: calc(var(--zia-load-progress, 0) * 100%);
+  --zia-load-p: var(--zia-load-progress, 0);
+
+  --zia-load-tint: color-mix(in srgb, var(--zia-loading-color) 30%, transparent),
+    color-mix(in srgb, var(--zia-loading-color) 14%, transparent) 50%,
+    transparent 100%;
+  --zia-load-glow: color-mix(in srgb, var(--zia-loading-color) 36%, transparent),
+    color-mix(in srgb, var(--zia-loading-color) 16%, transparent) 35%,
+    color-mix(in srgb, var(--zia-loading-color) 5%, transparent) 70%,
+    transparent 100%;
+  background:
+
+    radial-gradient(farthest-side at 100% 100%, var(--zia-load-glow))
+      calc(var(--zia-load-p) * 100% + (var(--zia-load-p) - 1) * 180px) 100% / 180px 100% no-repeat,
+
+    radial-gradient(farthest-side at 0% 100%, var(--zia-load-glow))
+      calc(var(--zia-load-p) * 100% + var(--zia-load-p) * 28px) 100% / 28px 100% no-repeat,
+
+    radial-gradient(100% 100% at 100% 100%, var(--zia-load-tint))
+      calc(var(--zia-load-p) * 100% + (var(--zia-load-p) - 1) * 240px) 100% / 240px 100% no-repeat,
+    radial-gradient(100% 100% at 0% 100%, var(--zia-load-tint))
+      calc(var(--zia-load-p) * 100% + var(--zia-load-p) * 36px) 100% / 36px 100% no-repeat,
+
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--zia-loading-color) 70%, transparent),
+      var(--zia-loading-color) 85%,
+      color-mix(in srgb, var(--zia-loading-color) 55%, white) 100%
+    ) left bottom / var(--zia-load-width) 1.5px no-repeat;
+}
+
+:root[zia-loading="true"] #urlbar:not([breakout-extend])::after {
+  opacity: 1;
+  animation: zia-loading-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes zia-loading-shimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.25); }
+}
+
+:root[zia-loader-reset="true"] #urlbar::after {
+  transition: none !important;
+}
+
+#urlbar .urlbar-input-box {
+  position: relative;
+}
+
+#zia-url-title,
+#zia-url-plain {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  color: var(--toolbar-field-color, currentColor);
+}
+
+#zia-url-title > span,
+#zia-url-plain > span {
+  white-space: pre;
+}
+
+#zia-url-title .zia-url-title-rest,
+#zia-url-plain .zia-url-title-rest {
+  opacity: 0.55;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#urlbar[zia-has-title="true"]:not(:hover):not([focused]):not([breakout-extend]) #zia-url-title {
+  display: flex;
+}
+
+#urlbar[zia-has-title="true"]:hover:not([focused]):not([breakout-extend]) #zia-url-plain {
+  display: flex;
+}
+
+#urlbar[zia-has-title="true"]:not([focused]):not([breakout-extend]) .urlbar-input {
+  opacity: 0 !important;
+}
+
+#urlbar :is(.urlbar-input, #zia-url-title, #zia-url-title span, #zia-url-plain, #zia-url-plain span) {
+  font-weight: var(--zia-urlbar-text-weight) !important;
+}
+
+#zen-copy-url-button {
+  display: none !important;
+}
+
+#urlbar #identity-box,
+#urlbar #page-action-buttons {
+  transition: opacity 0.15s ease !important;
+}
+
+#urlbar:not(:hover):not([focused]):not([breakout-extend]) :is(#identity-box, #page-action-buttons) {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+#zen-site-data-icon-button image {
+  list-style-image: url("chrome://sine/content/zia-urlbar/icons/site-settings.svg") !important;
+}
+
+#back-button {
+  list-style-image: url("chrome://sine/content/zia-urlbar/icons/back.svg") !important;
+}
+
+#forward-button {
+  list-style-image: url("chrome://sine/content/zia-urlbar/icons/forward.svg") !important;
+}
+
+#reload-button {
+  list-style-image: url("chrome://sine/content/zia-urlbar/icons/reload.svg") !important;
+}
+
+#stop-button {
+  list-style-image: url("chrome://sine/content/zia-urlbar/icons/stop.svg") !important;
+}
+
+:root[zia-site-light="true"] #zen-appcontent-navbar-wrapper {
+  color-scheme: light !important;
+  color: rgb(28, 28, 30) !important;
+  --toolbox-textcolor: rgb(28, 28, 30) !important;
+  --toolbar-color: rgb(28, 28, 30) !important;
+  --toolbar-field-color: rgb(28, 28, 30) !important;
+  --zen-toolbar-element-bg: rgba(0, 0, 0, 0.06) !important;
+  --zen-toolbar-element-bg-hover: rgba(0, 0, 0, 0.1) !important;
+
+  & #urlbar[breakout-extend] {
+    color-scheme: dark !important;
+    color: rgb(251, 251, 254) !important;
+    --toolbar-field-color: rgb(251, 251, 254) !important;
+  }
+}
+
+
+#urlbar:not([breakout-extend]) :is(.urlbar-input, #zia-url-title, #zia-url-plain) {
+  font-size: var(--zia-text-size) !important;
+}
+
+
+#urlbar:not([breakout-extend]) .urlbar-input {
+  color: rgb(255, 255, 255) !important;
+}
+
+:root[zia-site-light="true"] #urlbar:not([breakout-extend]) .urlbar-input {
+  color: rgb(28, 28, 30) !important;
+}
+
+
+#urlbar :is(#page-action-buttons, .urlbar-page-action) image,
+#urlbar .urlbar-icon {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+#urlbar #zen-site-data-icon-button image {
+  width: 17px !important;
+  height: 16px !important;
+}
+
+#urlbar #zen-site-data-icon-button {
+  padding: 4px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: center !important;
+}
+
+#urlbar-search-mode-indicator,
+#urlbar-search-mode-indicator-title,
+#urlbar-search-mode-indicator-close {
+  display: none !important;
+}
+
+
+#zen-loading-progress-bar {
+  display: none !important;
+}
+
+#urlbar[breakout-extend] .urlbar-input {
+  font-size: var(--zia-text-size) !important;
+  font-weight: var(--zia-urlbar-text-weight) !important;
+}
+
+
+#urlbar[breakout-extend] {
+  & .urlbar-input-container {
+    padding-inline-start: var(--zia-pop-icon-start, 16px) !important;
+  }
+
+  & #identity-box {
+    margin-inline: 0 var(--zia-pop-text-gap, 10px) !important;
+    padding: 0 !important;
+  }
+
+  & #identity-icon-box {
+    margin-inline: 0 !important;
+    padding: 0 !important;
+  }
+
+  & #identity-icon {
+    width: 16px !important;
+    height: 16px !important;
+    opacity: 1 !important;
+    list-style-image: var(--zia-typed-icon, url("chrome://global/skin/icons/search-glass.svg")) !important;
+  }
+
+  &[usertyping] #identity-icon {
+    fill-opacity: 1 !important;
+    fill: rgb(255, 255, 255) !important;
+  }
+}
+
+
+#urlbar #identity-icon-label,
+#urlbar .identity-icon-label {
+  display: none !important;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  #urlbar > .urlbar-background,
+  #urlbar::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  #zen-appcontent-navbar-wrapper {
+    transition: none !important;
+  }
+}

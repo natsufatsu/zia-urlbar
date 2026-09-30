@@ -1,0 +1,28 @@
+{
+  "id": "zia-urlbar",
+  "name": "Zia URL Bar",
+  "description": "Dia-style URL bar, search dropdown, loading glow, site-colored top toolbar and rounded page frame.",
+  "author": "z1n-k (original Zia)",
+  "version": "1.0.0",
+  "style": {
+    "chrome": "chrome.css"
+  },
+  "scripts": {
+    "zia-urlbar.uc.js": {
+      "include": [
+        "chrome://browser/content/browser.xhtml"
+      ]
+    }
+  },
+  "tags": [
+    "chrome",
+    "dia",
+    "urlbar",
+    "toolbar"
+  ],
+  "fork": [
+    "zen"
+  ],
+  "preferences": "preferences.json",
+  "homepage": "https://github.com/natsufatsu/zia-urlbar"
+}
