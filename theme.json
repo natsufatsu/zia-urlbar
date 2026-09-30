@@ -3,7 +3,7 @@
   "name": "Zia URL Bar",
   "description": "Dia-style URL bar, search dropdown, loading glow, site-colored top toolbar and rounded page frame.",
   "author": "z1n-k (original Zia)",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "style": {
     "chrome": "chrome.css"
   },

@@ -54,7 +54,7 @@
     margin-left: var(--zia-card-gap) !important;
   }
 
-  & :is(#zen-appcontent-wrapper, #zen-appcontent-navbar-wrapper, #tabbrowser-tabpanels .browserSidebarContainer, #tabbrowser-tabpanels .browserStack, #tabbrowser-tabpanels browser) {
+  & :is(#zen-appcontent-wrapper, #zen-appcontent-navbar-wrapper, #tabbrowser-tabpanels:not([zen-split-view="true"]) .browserSidebarContainer, #tabbrowser-tabpanels:not([zen-split-view="true"]) .browserStack, #tabbrowser-tabpanels:not([zen-split-view="true"]) browser) {
     corner-shape: round !important;
   }
 
@@ -62,18 +62,18 @@
     margin: 0 !important;
   }
 
-  & #tabbrowser-tabbox #tabbrowser-tabpanels .browserSidebarContainer {
+  & #tabbrowser-tabbox #tabbrowser-tabpanels:not([zen-split-view="true"]) .browserSidebarContainer {
     border-radius: 0 0 var(--zia-card-radius) var(--zia-card-radius) !important;
     box-shadow: none !important;
     border: none !important;
     outline: none !important;
   }
 
-  & #tabbrowser-tabpanels :is(.browserSidebarContainer, .browserStack, browser) {
+  & #tabbrowser-tabpanels:not([zen-split-view="true"]) :is(.browserSidebarContainer, .browserStack, browser) {
     clip-path: inset(0 round 0 0 var(--zia-card-radius) var(--zia-card-radius));
   }
 
-  & #tabbrowser-tabpanels browser[type="content"]:not([transparent="true"]) {
+  & #tabbrowser-tabpanels:not([zen-split-view="true"]) browser[type="content"]:not([transparent="true"]) {
     background: var(--zia-page-loading-bg) !important;
   }
 

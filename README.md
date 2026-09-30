@@ -29,6 +29,17 @@ Restart after enabling, disabling or updating the mod's JavaScript.
 The standalone Zia Media Player and Zia Split Tabs packages can also be enabled
 if you separately want those features.
 
+## Compatibility (1.0.1)
+
+Checked together with [Quick Save Image](https://github.com/natsufatsu/Zen-Quick-Save-Image),
+[Zia Media Player](https://github.com/natsufatsu/zia-media-player), and
+[Zia Split Tabs](https://github.com/natsufatsu/zia-split-tabs).
+The rounded frame keeps Zen's own split-pane corners, shadows, clipping and
+header controls. The URL display and toolbar color follow the focused split tab.
+Image saving, context menus, downloads, media colors and opacity settings are
+handled by their respective mods.
+See [the compatibility report](COMPATIBILITY.md) for tested versions and coverage.
+
 ## Settings
 
 In Sine's settings for **Zia URL Bar**, choose whether to use Zen's accent color
@@ -41,7 +52,14 @@ standalone package. From that workspace, run `python tools/build_urlbar_mod.py`.
 `python tools/build_mods.py` also rebuilds this package along with the other mods.
 Run `node tools/check_urlbar_mod.cjs` for package and simulated browser checks.
 
-Live Zen visual verification is still required. Check address hover, click and
-Ctrl/Cmd+L, searching, loading and error pages, tab switching, scrolling on light
-and dark sites, and native split view. The popup retains upstream's dark styling.
-Verify that sidebar, folders and PiP keep their normal Zen appearance and behavior.
+Automated headless checks on Windows with Zen 1.22.3b load all four mods in an
+isolated profile. They verify actual image downloads and duplicate filenames,
+media playback and workspace colors, opacity settings, native split-pane styling
+and controls, synthetic split drag/cancel/drop events, and URL/title/color updates
+when focusing light and dark panes. Checks pass with URL Bar loaded first or last.
+The development workspace contains `tools/check_urlbar_live.py` and
+`tools/urlbar_live_checks.js` for reproducing those checks.
+
+Interactive visual verification is still needed for drag feel, address hover,
+Ctrl/Cmd+L and dropdown alignment. The popup retains upstream's dark styling.
+Other Zen versions and platforms have not been tested live.
